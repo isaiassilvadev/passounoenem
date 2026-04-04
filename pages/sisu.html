@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Passou No Enem</title>
+  <link rel="shortcut icon" href="../images/favicon/passou_no_enem_favicon-Red.png" type="image/x-icon">
+
+  <script src="../main.js" defer></script>
+</head>
+<body>
+  <header>
+    <a href="../index.html">
+    <img src="../images/passou_no_enem_logo_principalofc-Red.png" alt="logo">
+   </a>
+
+    <nav>
+      <a href="../pages/prouni.html">PROUNI</a>
+    </nav>
+  </header>
+  
+  <main>
+    <section id="containerNota">
+      <h1>Descubra onde você passa no SISU</h1>
+      <form class="form-grid">
+  
+          <div class="bloco">
+            <label for="estado">Digite um estado</label>
+            <input type="text" name="estado" id="estado" placeholder="Ex: SP, RJ, MG, BA, PE..." list="lista-estados">
+        
+            <datalist id="lista-estados">
+        
+            </datalist>
+        
+            <label for="seuCurso">Qual curso você quer?</label>
+            <input type="datetime" name="seuCurso" id="seuCurso" list="lista-cursos"
+              placeholder="Ex: Medicina, Direito, ADS...">
+        
+            <datalist id="lista-cursos">
+            </datalist>
+        
+            <label for="nota-enem">Qual foi sua nota no ENEM?</label>
+            <input type="number" name="nota-enem" id="nota-enem" placeholder="Digite sua nota de (0 a 100)" min="0" max="1000">
+          </div>
+        
+          <div class="bloco">
+            <input type="submit" value="Descobrir Minhas Chances">
+          </div>
+        
+        </form>
+
+    </section>
+
+    <div id="overlay" class="hidden"></div>
+
+    <section id="radar" class="modal hidden">
+
+      <article class="modal-header">
+        <h2>ONDE VOÇE TEM CHANCE</h2>
+        <button id="fechar">X</button>
+      </article>
+
+      <article class="modal-in">
+        <p>Sua nota: <strong id="nota-usuario">000</strong></p>
+      </article>
+
+      <div class="modal-divisor">---</div>
+
+      <article class="modal-body">
+        <div class="chance-alta">
+          <h3><span>verde</span> Alta chance</h3>
+          <div class="cards-grid" id="altaChance">V</div>
+        </div>
+
+        <div class="chance-media">
+          <h3><span>amarelo</span> Média chance</h3>
+          <div class="cards-grid" id="mediaChance">A</div>
+        </div>
+
+        <div class="chance-baixa">
+          <h3><span>vermelho</span> Baixa chance</h3>
+          <div class="cards-grid" id="altaChance">R</div>
+        </div>
+      </article>
+        
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <section class="marca-rodape">
+      <h3>PassouNoEnem</h3>
+      <p>Descubra onde tem mais chances com sua nota do ENEM.</p>
+    </section>
+
+    <section class="menu-rodape">
+      <a href="../index.html">SISU</a>
+      <a href="../pages/prouni.html">PROUNI</a>
+    </section>
+
+    <section class="rodape-info">
+      <p>Dados baseados em notas de corte anteriores.</p>
+      <p>&copy; 2026 PassouNoEnem&trade;</p>
+    </section>
+  </footer>
+</body>
+</html>
