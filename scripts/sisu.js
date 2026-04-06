@@ -52,34 +52,135 @@ const infoFaculdadesSisu = {
 
 const form = document.querySelector('.form-grid');
 
-function filtrarResultados(notaUsuario, cursoDigitado, estadoDigitado) {
-  const alta = [];
-  const media = [];
-  const baixa = [];
+
+function mostrarResultado(usuario) {
+    const divTodasChances = document.querySelector('#todasChances');
+
+    const cardFacul = document.createElement('div');
+    cardFacul.classList.add('card-facul');
+
+    const pFacul = document.createElement('p');
+      const pNota = document.createElement('p');
+      const spanDiff = document.createElement('span');
+
+  const melhoresPublicas = usuario.resultados.filter(univ => univ.tipo === "Pública").sort((a, b) => a.diff - b.diff).slice(0, 3);
+
+ if(melhoresPublicas.length === 2) {
+  montarDoisCards(melhoresPublicas);
+ } else if(melhoresPublicas.length === 3 || melhoresPublicas.length > 3) {
+  montarTresCards(melhoresPublicas);
+ } else {
+  melhoresPublicas.forEach(facul => {
+    pFacul.textContent = facul.faculdade;
+    pNota.textContent = `Nota de corte: ${facul.notaCorte}`;
+    spanDiff.textContent = `Faltam: ${facul.diff}`;
+
+     cardFacul.appendChild(pFacul); 
+     cardFacul.appendChild(pNota);
+     cardFacul.appendChild(spanDiff);
+
+     divTodasChances.innerHTML = "";
+     divTodasChances.appendChild(cardFacul);
+  });
+ }
 
 }
 
-function renderResultados(alta, media , baixa, nota){
-  const altaDiv = document.querySelector('#altaChance');
-  const mediaDiv = document.querySelector('#mediaChance');
-  const baixaDiv = document.querySelector('#baixaChance');
+function montarDoisCards(faculs) {
+  const divTodasChances = document.querySelector('#todasChances');
+
+  console.log(faculs)
+  if(faculs.length === 2){
+    faculs.forEach(facul => {
+      const cardFacul1 = document.createElement('div');
+      cardFacul1.classList.add('card-facul');
+      const cardFacul2 = document.createElement('div');
+      cardFacul2.classList.add('card-facul');
 
 
-  altaDiv.innerHTML = gerarCards(alta);
-  mediaDiv.innerHTML = gerarCards(media);
-  baixaDiv.innerHTML = gerarCards(baixa);
+      const pFacul1 = document.createElement('p');
+      const pNota1 = document.createElement('p');
+      const spanDiff1 = document.createElement('span');
+      const pFacul2 = document.createElement('p');
+      const pNota2 = document.createElement('p');
+      const spanDiff2 = document.createElement('span');
+
+
+      pFacul1.textContent = facul.faculdade;
+      pNota1.textContent = `Nota de corte: ${facul.notaCorte}`;
+      spanDiff1.textContent = `Faltam: ${facul.diff}`;
+
+      pFacul2.textContent = facul.faculdade;
+      pNota2.textContent = `Nota de corte: ${facul.notaCorte}`;
+      spanDiff2.textContent = `Faltam: ${facul.diff}`;
+
+
+      cardFacul1.appendChild(pFacul1); 
+      cardFacul1.appendChild(pNota1);
+      cardFacul1.appendChild(spanDiff1);
+      cardFacul2.appendChild(pFacul2);
+      cardFacul2.appendChild(pNota2);
+      cardFacul2.appendChild(spanDiff2);
+
+      divTodasChances.innerHTML = "";
+     divTodasChances.appendChild(cardFacul1);
+     divTodasChances.appendChild(cardFacul2);
+    })
+  }
 }
 
-function gerarCards(lista){
-  
-  if(lista.length === 0){
-    return '<p>Nenhum resultado encontrado.</p>';
+function montarTresCards(faculs) {
+  const divTodasChances = document.querySelector('#todasChances');
 
-    return lista.map(item => `<div class="card">
-      <h3>${item.curso}</h3>
-      <p>Estado: ${infoFaculdadesSisu[item.faculdade].estado}</p>
-      <p>Nota de corte: ${item.nota}</p>
-    </div>`).join("");
+  console.log(faculs)
+  if(faculs.length === 3){
+    faculs.forEach(facul => {
+      const cardFacul1 = document.createElement('div');
+      cardFacul1.classList.add('card-facul');
+      const cardFacul2 = document.createElement('div');
+      cardFacul2.classList.add('card-facul');
+      const cardFacul3 = document.createElement('div');
+      cardFacul3.classList.add('card-facul');
+
+      const pFacul1 = document.createElement('p');
+      const pNota1 = document.createElement('p');
+      const spanDiff1 = document.createElement('span');
+      const pFacul2 = document.createElement('p');
+      const pNota2 = document.createElement('p');
+      const spanDiff2 = document.createElement('span');
+      const pFacul3 = document.createElement('p');
+      const pNota3 = document.createElement('p');
+      const spanDiff3 = document.createElement('span');
+
+
+      pFacul1.textContent = facul.faculdade;
+      pNota1.textContent = `Nota de corte: ${facul.notaCorte}`;
+      spanDiff1.textContent = `Faltam: ${facul.diff}`;
+
+      pFacul2.textContent = facul.faculdade;
+      pNota2.textContent = `Nota de corte: ${facul.notaCorte}`;
+      spanDiff2.textContent = `Faltam: ${facul.diff}`;
+
+      pFacul3.textContent = facul.faculdade;
+      pNota3.textContent = `Nota de corte: ${facul.notaCorte}`;
+      spanDiff3.textContent = `Faltam: ${facul.diff}`;
+
+
+      cardFacul1.appendChild(pFacul1); 
+      cardFacul1.appendChild(pNota1);
+      cardFacul1.appendChild(spanDiff1);
+      cardFacul2.appendChild(pFacul2);
+      cardFacul2.appendChild(pNota2);
+      cardFacul2.appendChild(spanDiff2);
+      cardFacul3.appendChild(pFacul3);
+      cardFacul3.appendChild(pNota3);
+      cardFacul3.appendChild(spanDiff3);
+
+      divTodasChances.innerHTML = "";
+     divTodasChances.appendChild(cardFacul1);
+     divTodasChances.appendChild(cardFacul2);
+     divTodasChances.appendChild(cardFacul3);
+    })
   }
 }
 
@@ -109,16 +210,19 @@ form.addEventListener('submit', function(event) {
 
       if(cursoMatch && estadoMatch){
         usuario.resultados.push({
-          faculdade: faculInfo.nome,
+          faculdade: item.faculdade,
           estado: faculInfo.estado,
+          tipo: faculInfo.tipo,
           curso: item.curso,
           notaCorte: item.nota,
-          diff: usuario.nota - item.nota
+          diff: usuario.nota >= item.nota ? usuario.nota - item.nota : item.nota - usuario.nota
         });
       }
     })
 
     console.log(usuario.resultados)
+
+    mostrarResultado(usuario);
 
     let contNota = document.querySelector('#nota-usuario');
 
