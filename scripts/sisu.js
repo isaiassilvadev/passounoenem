@@ -55,22 +55,19 @@ const form = document.querySelector('.form-grid');
 
 function mostrarResultado(usuario) {
     const divTodasChances = document.querySelector('#todasChances');
+  divTodasChances.innerHTML = "";
 
+  const melhoresPublicas = usuario.resultados.filter(univ => univ.tipo === "Pública").sort((a, b) => a.diff - b.diff).slice(0, 3);
+
+ 
+  melhoresPublicas.forEach(facul => {
     const cardFacul = document.createElement('div');
     cardFacul.classList.add('card-facul');
 
     const pFacul = document.createElement('p');
       const pNota = document.createElement('p');
       const spanDiff = document.createElement('span');
-
-  const melhoresPublicas = usuario.resultados.filter(univ => univ.tipo === "Pública").sort((a, b) => a.diff - b.diff).slice(0, 3);
-
- if(melhoresPublicas.length === 2) {
-  montarDoisCards(melhoresPublicas);
- } else if(melhoresPublicas.length === 3 || melhoresPublicas.length > 3) {
-  montarTresCards(melhoresPublicas);
- } else {
-  melhoresPublicas.forEach(facul => {
+    
     pFacul.textContent = facul.faculdade;
     pNota.textContent = `Nota de corte: ${facul.notaCorte}`;
     spanDiff.textContent = `Faltam: ${facul.diff}`;
@@ -78,111 +75,11 @@ function mostrarResultado(usuario) {
      cardFacul.appendChild(pFacul); 
      cardFacul.appendChild(pNota);
      cardFacul.appendChild(spanDiff);
-
-     divTodasChances.innerHTML = "";
      divTodasChances.appendChild(cardFacul);
   });
- }
 
 }
 
-function montarDoisCards(faculs) {
-  const divTodasChances = document.querySelector('#todasChances');
-
-  console.log(faculs)
-  if(faculs.length === 2){
-    faculs.forEach(facul => {
-      const cardFacul1 = document.createElement('div');
-      cardFacul1.classList.add('card-facul');
-      const cardFacul2 = document.createElement('div');
-      cardFacul2.classList.add('card-facul');
-
-
-      const pFacul1 = document.createElement('p');
-      const pNota1 = document.createElement('p');
-      const spanDiff1 = document.createElement('span');
-      const pFacul2 = document.createElement('p');
-      const pNota2 = document.createElement('p');
-      const spanDiff2 = document.createElement('span');
-
-
-      pFacul1.textContent = facul.faculdade;
-      pNota1.textContent = `Nota de corte: ${facul.notaCorte}`;
-      spanDiff1.textContent = `Faltam: ${facul.diff}`;
-
-      pFacul2.textContent = facul.faculdade;
-      pNota2.textContent = `Nota de corte: ${facul.notaCorte}`;
-      spanDiff2.textContent = `Faltam: ${facul.diff}`;
-
-
-      cardFacul1.appendChild(pFacul1); 
-      cardFacul1.appendChild(pNota1);
-      cardFacul1.appendChild(spanDiff1);
-      cardFacul2.appendChild(pFacul2);
-      cardFacul2.appendChild(pNota2);
-      cardFacul2.appendChild(spanDiff2);
-
-      divTodasChances.innerHTML = "";
-     divTodasChances.appendChild(cardFacul1);
-     divTodasChances.appendChild(cardFacul2);
-    })
-  }
-}
-
-function montarTresCards(faculs) {
-  const divTodasChances = document.querySelector('#todasChances');
-
-  console.log(faculs)
-  if(faculs.length === 3){
-    faculs.forEach(facul => {
-      const cardFacul1 = document.createElement('div');
-      cardFacul1.classList.add('card-facul');
-      const cardFacul2 = document.createElement('div');
-      cardFacul2.classList.add('card-facul');
-      const cardFacul3 = document.createElement('div');
-      cardFacul3.classList.add('card-facul');
-
-      const pFacul1 = document.createElement('p');
-      const pNota1 = document.createElement('p');
-      const spanDiff1 = document.createElement('span');
-      const pFacul2 = document.createElement('p');
-      const pNota2 = document.createElement('p');
-      const spanDiff2 = document.createElement('span');
-      const pFacul3 = document.createElement('p');
-      const pNota3 = document.createElement('p');
-      const spanDiff3 = document.createElement('span');
-
-
-      pFacul1.textContent = facul.faculdade;
-      pNota1.textContent = `Nota de corte: ${facul.notaCorte}`;
-      spanDiff1.textContent = `Faltam: ${facul.diff}`;
-
-      pFacul2.textContent = facul.faculdade;
-      pNota2.textContent = `Nota de corte: ${facul.notaCorte}`;
-      spanDiff2.textContent = `Faltam: ${facul.diff}`;
-
-      pFacul3.textContent = facul.faculdade;
-      pNota3.textContent = `Nota de corte: ${facul.notaCorte}`;
-      spanDiff3.textContent = `Faltam: ${facul.diff}`;
-
-
-      cardFacul1.appendChild(pFacul1); 
-      cardFacul1.appendChild(pNota1);
-      cardFacul1.appendChild(spanDiff1);
-      cardFacul2.appendChild(pFacul2);
-      cardFacul2.appendChild(pNota2);
-      cardFacul2.appendChild(spanDiff2);
-      cardFacul3.appendChild(pFacul3);
-      cardFacul3.appendChild(pNota3);
-      cardFacul3.appendChild(spanDiff3);
-
-      divTodasChances.innerHTML = "";
-     divTodasChances.appendChild(cardFacul1);
-     divTodasChances.appendChild(cardFacul2);
-     divTodasChances.appendChild(cardFacul3);
-    })
-  }
-}
 
 form.addEventListener('submit', function(event) {
     event.preventDefault();
