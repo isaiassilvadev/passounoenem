@@ -105,15 +105,21 @@ form.addEventListener('submit', function(event) {
       const cursoMatch = item.curso.toLowerCase().includes(usuario.curso);
       const estadoMatch = faculInfo.estado.toUpperCase() === usuario.estado;
 
-      if(cursoMatch && estadoMatch){
-        usuario.resultados.push({
-          faculdade: item.faculdade,
-          estado: faculInfo.estado,
-          tipo: faculInfo.tipo,
-          curso: item.curso,
-          notaCorte: item.nota,
-          diff: usuario.nota >= item.nota ? usuario.nota - item.nota : item.nota - usuario.nota
-        });
+     const jaExiste = usuario.resultados.some(
+      r => r.faculdade === item.faculdade);
+
+        if (!jaExiste) {
+          usuario.resultados.push({
+            faculdade: item.faculdade,
+            estado: faculInfo.estado,
+            tipo: faculInfo.tipo,
+            curso: item.curso,
+            notaCorte: item.nota,
+            diff: usuario.nota >= item.nota
+              ? usuario.nota - item.nota
+              : item.nota - usuario.nota
+          });
+        }
       }
     })
 
