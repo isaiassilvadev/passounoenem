@@ -120,7 +120,6 @@ form.addEventListener('submit', function(event) {
               : item.nota - usuario.nota
           });
         }
-      }
     })
 
     console.log(usuario.resultados)
@@ -130,4 +129,4 @@ form.addEventListener('submit', function(event) {
     let contNota = document.querySelector('#nota-usuario');
 
    contNota.textContent = nota;
-  });
+  };
