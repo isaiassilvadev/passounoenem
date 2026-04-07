@@ -98,30 +98,32 @@ form.addEventListener('submit', function(event) {
     }
 
     dados.forEach(item => {
-      const faculInfo = infoFaculdadesSisu[item.faculdade.toUpperCase()];
-
-      if(!faculInfo) return;
-
-      const cursoMatch = item.curso.toLowerCase().includes(usuario.curso);
-      const estadoMatch = faculInfo.estado.toUpperCase() === usuario.estado;
-
-     const jaExiste = usuario.resultados.some(
-      r => r.faculdade === item.faculdade);
-
-        if (!jaExiste) {
-          usuario.resultados.push({
-            faculdade: item.faculdade,
-            estado: faculInfo.estado,
-            tipo: faculInfo.tipo,
-            curso: item.curso,
-            notaCorte: item.nota,
-            diff: usuario.nota >= item.nota
-              ? usuario.nota - item.nota
-              : item.nota - usuario.nota
-          });
+        const faculInfo = infoFaculdadesSisu[item.faculdade.toUpperCase()];
+        if (!faculInfo) return;
+      
+        const cursoMatch = item.curso.toLowerCase().includes(usuario.curso);
+        const estadoMatch = faculInfo.estado.toUpperCase() === usuario.estado;
+      
+        if (cursoMatch && estadoMatch) {
+      
+          const jaExiste = usuario.resultados.some(
+            r => r.faculdade === item.faculdade
+          );
+      
+          if (!jaExiste) {
+            usuario.resultados.push({
+              faculdade: item.faculdade,
+              estado: faculInfo.estado,
+              tipo: faculInfo.tipo,
+              curso: item.curso,
+              notaCorte: item.nota,
+              diff: usuario.nota >= item.nota
+                ? usuario.nota - item.nota
+                : item.nota - usuario.nota
+            });
+          }
         }
-    })
-
+  });
     console.log(usuario.resultados)
 
     mostrarResultado(usuario);
