@@ -131,4 +131,4 @@ form.addEventListener('submit', function(event) {
     let contNota = document.querySelector('#nota-usuario');
 
    contNota.textContent = nota;
-  };
+  });
