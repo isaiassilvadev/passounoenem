@@ -1,4 +1,5 @@
 let dados = [];
+
 fetch('https://gist.githubusercontent.com/Zis2x/17fce2616f402b6b8fa3fdb94f76b4a8/raw/657ba033ce1f2c27f5e73b6e8fec81193efa3f9a/notas_faculdades.json')
   .then(response => response.json())
   .then(json => {
@@ -57,7 +58,15 @@ function mostrarResultado(usuario) {
     const divTodasChances = document.querySelector('#todasChances');
   divTodasChances.innerHTML = "";
 
-  const melhoresPublicas = usuario.resultados.filter(univ => univ.tipo === "Pública").sort((a, b) => a.diff - b.diff).slice(0, 3);
+  const melhoresPublicas = usuario.resultados.filter(univ => univ.tipo === "Pública").sort((a, b) => {
+    if (a.diff >= 0 && b.diff < 0) {
+     return -1
+    }
+    if (a.diff < 0 && b.diff >= 0) {
+     return 1
+    }
+    return b.diff - a.diff;
+  }).slice(0, 3);
 
  
   melhoresPublicas.forEach(facul => {
@@ -65,19 +74,57 @@ function mostrarResultado(usuario) {
     cardFacul.classList.add('card-facul');
 
     const pFacul = document.createElement('p');
-      const pNota = document.createElement('p');
-      const spanDiff = document.createElement('span');
+    const pNota = document.createElement('p');
+    const spanDiff = document.createElement('span');
+    const spanChance = document.createElement('span');
     
     pFacul.textContent = facul.faculdade;
+
+    if (facul.diff < 0) {
+      spanDiff.textContent = `Faltam: ${Math.abs(facul.diff)} pontos`;
+    } else if (facul.diff === 0) {
+      spanDiff.textContent = `No limite`;
+    } else if (facul.diff > 0) {
+      spanDiff.textContent = `Você passou com: ${Math.abs(facul.diff)} pontos a mais`;
+    }
     pNota.textContent = `Nota de corte: ${facul.notaCorte}`;
-    spanDiff.textContent = `Faltam: ${facul.diff}`;
+
+     const nivel = classificarChance(facul.diff);
+
+    cardFacul.classList.add(`chance-${nivel}`);
+
+    if (facul.diff >= 20) {
+      spanChance.textContent = `Passa com folga`
+    } else if(facul.diff >= 10 && facul.diff <= 20){
+      spanChance.textContent = `Você passou`
+    } else if(facul.diff >= 0 && facul.diff <= 10){
+      spanChance.textContent = `Na risca`
+    } else if(facul.diff < 0) {
+      spanChance.textContent = `Precisa melhorar`
+    }
 
      cardFacul.appendChild(pFacul); 
      cardFacul.appendChild(pNota);
      cardFacul.appendChild(spanDiff);
      divTodasChances.appendChild(cardFacul);
+     cardFacul.appendChild(spanChance);
   });
 
+}
+
+function classificarChance(diff) {
+  if (diff >= 0) return "alta";
+  if (diff >= -30) return "possivel";
+  if (diff >= -60) return "quase";
+  if (diff >= -100) return "baixa";
+  if (diff < -100) return "muito-baixa";
+}
+
+function normalizar(texto) {
+  return texto
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[-]/g, "")
 }
 
 
@@ -101,13 +148,14 @@ form.addEventListener('submit', function(event) {
         const faculInfo = infoFaculdadesSisu[item.faculdade.toUpperCase()];
         if (!faculInfo) return;
       
-        const cursoMatch = item.curso.toLowerCase().includes(usuario.curso);
+        const cursoMatch = 
+        normalizar(item.curso) === normalizar(usuario.curso);
         const estadoMatch = faculInfo.estado.toUpperCase() === usuario.estado;
       
         if (cursoMatch && estadoMatch) {
       
           const jaExiste = usuario.resultados.some(
-            r => r.faculdade === item.faculdade
+            r => r.faculdade === item.faculdade && r.curso === item.curso
           );
       
           if (!jaExiste) {
@@ -117,9 +165,7 @@ form.addEventListener('submit', function(event) {
               tipo: faculInfo.tipo,
               curso: item.curso,
               notaCorte: item.nota,
-              diff: usuario.nota >= item.nota
-                ? usuario.nota - item.nota
-                : item.nota - usuario.nota
+              diff: usuario.nota - item.nota
             });
           }
         }

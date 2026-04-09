@@ -50,35 +50,6 @@ const infoFaculdades = {
   "UNIME": { nome: "UNIME", estado: "BA", cidade: "Lauro de Freitas", tipo: "Privada" }
 }
 
-const uniNacionais = {
-  AC: ["ANHANGUERA", "ESTACIO"],
-  AL: ["ANHANGUERA", "ESTACIO"],
-  AP: ["ANHANGUERA", "ESTACIO"],
-  AM: ["ANHANGUERA", "ESTACIO"],
-  BA: ["ANHANGUERA", "ESTACIO", "UNINASSAU", "UNIP", "PUC"],
-  CE: ["ANHANGUERA", "ESTACIO", "UNINASSAU"],
-  DF: ["ANHANGUERA", "ESTACIO", "UNIP", "PUC"],
-  ES: ["ANHANGUERA", "ESTACIO"],
-  GO: ["ANHANGUERA", "ESTACIO", "UNIP"],
-  MA: ["ANHANGUERA", "ESTACIO"],
-  MT: ["ANHANGUERA", "ESTACIO"],
-  MS: ["ANHANGUERA", "ESTACIO"],
-  MG: ["ANHANGUERA", "ESTACIO", "PUC", "UNIP"],
-  PA: ["ANHANGUERA", "ESTACIO"],
-  PB: ["ANHANGUERA", "ESTACIO", "UNINASSAU"],
-  PR: ["ANHANGUERA", "ESTACIO", "UNINTER", "PUC"],
-  PE: ["ANHANGUERA", "ESTACIO", "UNINASSAU"],
-  PI: ["ANHANGUERA", "ESTACIO"],
-  RJ: ["ANHANGUERA", "ESTACIO", "PUC", "FGV"],
-  RN: ["ANHANGUERA", "ESTACIO"],
-  RS: ["ANHANGUERA", "ESTACIO", "PUC"],
-  RO: ["ANHANGUERA", "ESTACIO"],
-  RR: ["ANHANGUERA", "ESTACIO"],
-  SC: ["ANHANGUERA", "ESTACIO", "UNINTER", "PUC"],
-  SE: ["ANHANGUERA", "ESTACIO"],
-  SP: ["ANHANGUERA", "ESTACIO", "PUC", "FGV", "UNIP", "CRUZEIRO"]
-};
-
 const faculdadesNacionais = {
   "PUC": { nome: "Pontifícia Universidade Católica", abrangencia: "Multi-estado", tipo: "Privada" },
   "ANHANGUERA": { nome: "Anhanguera", abrangencia: "Nacional", tipo: "Privada" },

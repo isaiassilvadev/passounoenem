@@ -25,6 +25,19 @@
     <section id="containerNota">
       <h1>Descubra onde você tem chance de bolsa com PROUNI</h1>
         <form>
+          <div id="containerElegivel" class="bloco">
+
+            <label for="renda">Qual é sua renda percapita familiar</label>
+            <input type="number" name="renda" id="renda" placeholder="Média da renda da sua família">
+
+            <input type="submit" value="Verificar">
+
+            <div>
+            <span id="resElegivel">...</span>
+            <span class="hidden" id="tipoBolsa">\o/
+            </div>
+          </div>
+
           <div class="bloco">
             <label for="estado">Digite um estado</label>
             <input type="text" name="estado" id="estado" placeholder="Ex: SP, RJ, MG, BA, PE..." list="lista-estados">
@@ -67,20 +80,7 @@
       <div class="modal-divisor">---</div>
 
       <article class="modal-body">
-        <div class="chance-alta">
-          <h3><span>verde</span> Alta chance</h3>
-          <div class="cards-grid" id="altaChance">V</div>
-        </div>
-
-        <div class="chance-media">
-          <h3><span>amarelo</span> Média chance</h3>
-          <div class="cards-grid" id="mediaChance">A</div>
-        </div>
-
-        <div class="chance-baixa">
-          <h3><span>vermelho</span> Baixa chance</h3>
-          <div class="cards-grid" id="altaChance">R</div>
-        </div>
+        <div class="cards-grid" id="todasChances"></div>
       </article>
         
     </section>
