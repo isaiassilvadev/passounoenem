@@ -1,10 +1,17 @@
 let dadosProuni = [];
 
-fetch('https://gist.githubusercontent.com/Zis2x/17fce2616f402b6b8fa3fdb94f76b4a8/raw/657ba033ce1f2c27f5e73b6e8fec81193efa3f9a/notas_faculdades.json')
-  .then(res => res.json())
-  .then(json => {
-    dadosProuni = json;
+fetch('https://gist.githubusercontent.com/Zis2x/17fce2616f402b6b8fa3fdb94f76b4a8/raw/471b402f942e0faeffca6fceda3118c8bb08ccfa/notas_faculdades.json')
+  .then(res => res.text())
+  .then(texto => {
+    const limpo = texto.replace(/\u00A0/g, " ");//Remove NBSP
+    dadosProuni = JSON.parse(limpo);
     console.log(dadosProuni);
+  });
+
+  dadosProuni.forEach((item, index) => {
+      if (!item.curso) {
+         console.log("Erro no item:",index, item);         
+      }
   });
 
 
@@ -228,12 +235,16 @@ spanElegivel.textContent = tipoBolsa;
     }
 
     dadosProuni.forEach(item => {
-        const faculInfos = infoFaculdadesProuni[item.faculdade.toUpperCase()];
+      
+        const faculInfos = item.faculdade.toUpperCase();
+        
+        
+
         if (!faculInfos) return;
       
         const cursoMatchUso = 
-        normalizarTexto(item.curso) === normalizarTexto(usuarioPro.curso);
-        const estadoMatchUso = faculInfos.estado.toUpperCase() === usuarioPro.estado;
+        normalizarTexto(item.curso).includes(normalizarTexto(usuarioPro.curso));
+        const estadoMatchUso = item.estado === usuarioPro.estado;
       
         if (cursoMatchUso && estadoMatchUso) {
       
@@ -244,8 +255,8 @@ spanElegivel.textContent = tipoBolsa;
           if (!jaExistePro) {
             usuarioPro.resultados.push({
               faculdade: item.faculdade,
-              estado: faculInfos.estado,
-              tipo: faculInfos.tipo,
+              estado: item.estado,
+              tipo: item.tipo,
               curso: item.curso,
               notaCorte: item.nota,
               diff: usuarioPro.nota - item.nota
@@ -254,6 +265,7 @@ spanElegivel.textContent = tipoBolsa;
         }
   })
     console.log(usuarioPro.resultados)
+    console.log(usuarioPro)
 
     mostrarResultadoProuni(usuarioPro);
 
