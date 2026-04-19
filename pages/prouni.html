@@ -27,10 +27,16 @@
         <form>
           <div id="containerElegivel" class="bloco">
 
-            <label for="renda">Qual é sua renda percapita familiar</label>
-            <input type="number" name="renda" id="renda" placeholder="Média da renda da sua família">
+            <h3>Tem direito ao Prouni</h3>
 
-            <input type="submit" value="Verificar">
+            <div>
+                <label for="renda">Qual é sua renda percapita familiar</label>
+                <input type="number" name="renda" id="renda" placeholder="Média da renda da sua família">
+
+                <Button type="submit"
+                id="verificar" >Verificar</Button>
+            </div>
+            
 
             <div>
             <span id="resElegivel">...</span>
@@ -39,6 +45,8 @@
           </div>
 
           <div class="bloco">
+            <h3>Descubra suas chances no PROUNI</h3>
+
             <label for="estado">Digite um estado</label>
             <input type="text" name="estado" id="estado" placeholder="Ex: SP, RJ, MG, BA, PE..." list="lista-estados">
         
@@ -74,7 +82,9 @@
       </article>
 
       <article class="modal-in">
-        <p>Sua nota: <strong id="nota-usuario">000</strong></p>
+        <p>Seu curso: <strong id="curso-usuario">-</strong></p>
+
+        <p>Sua nota: <strong id="nota-usuario">000</strong></p>       
       </article>
 
       <div class="modal-divisor">---</div>

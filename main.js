@@ -119,10 +119,25 @@ const cursos = [
 const listaCursos = document.getElementById("lista-cursos")
 const listaEstados = document.getElementById("lista-estados")
 
+const selecaoCursos = document.getElementById("lista-cursos")
+
+Object.entries(cursos).forEach(([id, curso]) => {
+  const option = document.createElement('option');
+
+  option.value = curso.id;
+
+  option.textContent = curso.nome;
+
+  selecaoCursos.appendChild(option);
+});
+
 cursos.forEach(curso => {
   const option = document.createElement('option')
 
-  option.value = curso.nome;
+  option.value = curso.id;
+
+
+  option.textContent = curso.nome;
 
   listaCursos.appendChild(option)
 })

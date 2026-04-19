@@ -24,8 +24,37 @@
     <section id="containerNota">
       <h1>Descubra onde você passa no SISU</h1>
       <form class="form-grid">
+          <div id="containerElegivel" class="bloco">
+
+            <h3>Verificação de Elegibilidade Cota de Baixa Renda (PPB)</h3>
+
+            <div>
+               <label for="escPub">Você estudou o Esino Médio completamente em escola pública?</label>
+
+              <select name="escPub" id="escPub">
+                <option value="sim">Sim</option>
+                <option value="nao">Não</option>
+              </select>
+            </div>
+
+           <div>
+              <label for="renda">Qual é sua renda percapita familiar</label>
+            <input type="number" name="renda" id="renda" placeholder="Média da renda da sua família">
+
+            <button type="submit" id="verificar">
+              Verificar
+            </button>
+           </div>           
+
+            <div>
+            <span id="resElegivel">...</span>
+            <span class="hidden" id="tipoBolsa">\o/
+            </div>
+          </div>
   
           <div class="bloco">
+            <h3>Simule Sua Aprovação</h3>
+
             <label for="estado">Digite um estado</label>
             <input type="text" name="estado" id="estado" placeholder="Ex: SP, RJ, MG, BA, PE..." list="lista-estados">
         
@@ -62,6 +91,8 @@
       </article>
 
       <article class="modal-in">
+        <p>Seu curso: <strong id="curso-usuario">-</strong></p>
+
         <p>Sua nota: <strong ><span id="nota-usuario">000</span></strong></p>
       </article>
 
