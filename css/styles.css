@@ -1,0 +1,229 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --fundo: #0f0c1a;
+  --card: #1a1530;
+  --destaque: #7c4dff;
+  --texto: #f1f1f1;
+  --secundario: #b3aaff;
+}
+
+.claro {
+  --fundo: #fff8f2;
+  --card: #ffffff;
+  --destaque: #a66a3f;
+  --texto: #2b2b2b;
+  --secundario: #ff8c42;
+}
+
+body {
+  background-color: var(--fundo);
+  color: var(--texto);
+  font-family: 'Arial', Helvetica, sans-serif;
+}
+
+header {
+  background-color: var(--destaque);
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  color: var(--destaque);
+}
+
+h2, h3 {
+  color: var(--secundario);
+}
+
+main {
+  display: grid;
+  gap: 24px;
+  padding: 16px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+}
+header img {
+  width: 120px;
+}
+
+nav {
+  display: flex;
+  gap: 16px;
+}
+
+#containerNota {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bloco {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  background-color: var(--card);
+  padding: 16px;
+  border-radius: 12px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+input, button {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button, input[type="submit"] {
+  background-color: var(--destaque);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 90%;
+  max-width: 600px;
+
+  background-color: var(--card);
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-in {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.cardFacul {
+  display: flex;
+  background-color: var(--card);
+  gap: 10px;
+
+  border-radius: 10px;
+  padding: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.cardTopo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardTopo h3 {
+  font-size: 1rem;
+}
+
+.nota-corte {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.cardMeio {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.diferenca {
+  font-weight: bold;
+  color: var(--destaque);
+}
+
+.status {
+  font-size: 0.85rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.status.sucesso {
+  background: rgba(0, 255, 100, 0.15);
+  color: #00c853;
+}
+
+.status.medio {
+  background: rgba(255, 193, 7, 0.15);
+  color: #ffb300;
+}
+
+.status.perigo {
+  background: rgba(255, 0, 0, 0.15);
+  color: #ff5252;
+}
+
+
+.rodape {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  main {
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
+  }
+
+  .rodape {
+  text-align: left;
+ }
+}
+
+@media (min-width: 900px) {
+  .cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

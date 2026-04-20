@@ -100,6 +100,40 @@ const uniNacionais = {
 
 const formPro = document.querySelector('form');
 
+const modal = document.querySelector('#radar');
+const overlay = document.querySelector('#overlay');
+
+function selecaoInfo() {
+  const listaCursosPro = document.getElementById("lista-cursos")
+  const listaEstadosPro = document.getElementById("lista-estados")
+
+cursosPro.forEach(curso => {
+  const optionPro = document.createElement('option')
+
+  optionPro.value = curso.id;
+
+
+  optionPro.textContent = curso.nome;
+
+  listaCursosPro.appendChild(optionPro)
+})
+
+//Pegar estados
+const estadosPro = Object.values(infoFaculdades).map(f => f.estado);
+
+//Remover duplicados e ordenar com método sort()
+const estadosUnicosPro = [...new Set(estadosPro)].sort();
+
+//Adicionar no datalist
+estadosUnicosPro.forEach(estado => {
+  const optionPro = document.createElement('option')
+
+  optionPro.value = estado;
+
+  listaEstadosPro.appendChild(optionPro)
+ })
+}
+
 
 function verificadorBolsa(renda) {
   const salarioMin = 1621
@@ -133,14 +167,18 @@ function mostrarResultadoProuni(usuario) {
  
   melhoresPrivadas.forEach(facul => {
     const cardFaculPro = document.createElement('div');
-    cardFaculPro.classList.add('card-facul');
+    cardFaculPro.classList.add('cardFacul');
+     const cardFacTopoPro = document.createElement('div');
+    cardFacTopoPro.classList.add('cardTopo');
+    const cardFacMeioPro = document.createElement('div');
+    cardFacMeioPro.classList.add('cardMeio');
 
-    const pFaculPro = document.createElement('p');
+    const nmFaculPro = document.createElement('h3');
     const pNotaPro = document.createElement('p');
     const spanDiffPro = document.createElement('span');
     const spanChancePro = document.createElement('span');
     
-    pFaculPro.textContent = facul.faculdade;
+    nmFaculPro.textContent = facul.faculdade;
 
     if (facul.diff < 0) {
       spanDiffPro.textContent = `Faltam: ${Math.abs(facul.diff)} pontos`;
@@ -165,10 +203,14 @@ function mostrarResultadoProuni(usuario) {
       spanChancePro.textContent = `Precisa melhorar`
     }
 
-     cardFaculPro.appendChild(pFaculPro); 
-     cardFaculPro.appendChild(pNotaPro);
-     cardFaculPro.appendChild(spanDiffPro);
-     cardFaculPro.appendChild(spanChancePro);
+     cardFacTopoPro.appendChild(nmFaculPro);
+     cardFacTopoPro.appendChild(pNotaPro);
+    
+    cardFacMeioPro.appendChild(spanDiffPro);
+    cardFacMeioPro.appendChild(spanChancePro);
+
+     cardFaculPro.appendChild(cardFacTopoPro); 
+     cardFaculPro.appendChild(cardFacMeioPRo);
 
      divTodasChancesPro.appendChild(cardFaculPro);
   
@@ -193,6 +235,8 @@ function pegarNomeCurso(idCurso) {
 
 const BtnVerificarEleg = document.querySelector('#verificar');
 
+document.addEventListener('DOMContentLoaded', selecaoInfo);
+
 BtnVerificarEleg.addEventListener('click', function() {
     const renda = Number(document.querySelector('#renda').value);
 
@@ -205,6 +249,9 @@ BtnVerificarEleg.addEventListener('click', function() {
 
 formPro.addEventListener('submit', (e) => {
   e.preventDefault();
+
+  modal.classList.remove('hidden');
+  overlay.classList.remove('hidden');
 
    const notaUso = Number(document.querySelector('#nota-enem').value);
 
@@ -264,3 +311,10 @@ formPro.addEventListener('submit', (e) => {
     contNotaUso.textContent = notaUso;
 
 });
+
+const btnFecharModal = document.querySelector('#fechar');
+
+btnFecharModal.addEventListener('click', () => {
+  modal.classList.add('hidden');
+  overlay.classList.add('hidden');
+})

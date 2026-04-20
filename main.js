@@ -1,9 +1,11 @@
-/*fetch('https://gist.githubusercontent.com/Zis2x/17fce2616f402b6b8fa3fdb94f76b4a8/raw/657ba033ce1f2c27f5e73b6e8fec81193efa3f9a/notas_faculdades.json')
-  .then(res => res.json())
-  .then(dados => {
-    const cursosUsp = dados.filter(item => item.faculdade === "UFRJ")
-    console.log(cursosUsp)
-  })
+const dadosFac = [];
+
+/*fetch('https://gist.githubusercontent.com/Zis2x/17fce2616f402b6b8fa3fdb94f76b4a8/raw/471b402f942e0faeffca6fceda3118c8bb08ccfa/notas_faculdades.json')
+  .then(res => res.text())
+  .then(texto => {
+    const limpoTxt = texto.replace(/\u00A0/g, " ");//Remove NBSP
+    dadosFac = JSON.parse(limpoTxt);
+  });
 */
 
 //Objetos
@@ -116,43 +118,19 @@ const cursos = [
   { id: "eng_computacao", nome: "Engenharia da Computação", categoria: "extras", area: "tecnologia" }
 ];
 
-const listaCursos = document.getElementById("lista-cursos")
-const listaEstados = document.getElementById("lista-estados")
 
-const selecaoCursos = document.getElementById("lista-cursos")
 
-Object.entries(cursos).forEach(([id, curso]) => {
-  const option = document.createElement('option');
+//Alterar Tema
+const btnTema = document.getElementById('toggleTema')
 
-  option.value = curso.id;
+btnTema.addEventListener('click', () => {
+  document.body.classList.toggle('claro');
 
-  option.textContent = curso.nome;
-
-  selecaoCursos.appendChild(option);
+  localStorage.setItem('tema', document.body.classList.contains('claro') ? 'claro' : '');
 });
 
-cursos.forEach(curso => {
-  const option = document.createElement('option')
+const temaSalvo = localStorage.getItem('tema');
 
-  option.value = curso.id;
-
-
-  option.textContent = curso.nome;
-
-  listaCursos.appendChild(option)
-})
-
-//Pegar estados
-const estados = Object.values(infoFaculdades).map(f => f.estado);
-
-//Remover duplicados e ordenar com método sort()
-const estadosUnicos = [...new Set(estados)].sort();
-
-//Adicionar no datalist
-estadosUnicos.forEach(estado => {
-  const option = document.createElement('option')
-
-  option.value = estado;
-
-  listaEstados.appendChild(option)
-})
+if(temaSalvo === 'claro') {
+  document.body.classList.add('claro');
+}

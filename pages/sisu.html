@@ -6,6 +6,9 @@
   <title>Passou No Enem</title>
   <link rel="shortcut icon" href="../images/favicon/passou_no_enem_favicon-Red.png" type="image/x-icon">
 
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/sisu.css">
+
   <script src="../main.js" defer></script>
   <script src="../scripts/sisu.js" defer></script>
 </head>
@@ -23,6 +26,8 @@
   <main>
     <section id="containerNota">
       <h1>Descubra onde você passa no SISU</h1>
+      <button id="toggleTema">x</button>
+
       <form class="form-grid">
           <div id="containerElegivel" class="bloco">
 
@@ -48,7 +53,7 @@
 
             <div>
             <span id="resElegivel">...</span>
-            <span class="hidden" id="tipoBolsa">\o/
+            <span class="hidden" id="tipoBolsa">\o/</span>
             </div>
           </div>
   
@@ -63,7 +68,7 @@
             </datalist>
         
             <label for="seuCurso">Qual curso você quer?</label>
-            <input type="datetime" name="seuCurso" id="seuCurso" list="lista-cursos"
+            <input type="text" name="seuCurso" id="seuCurso" list="lista-cursos"
               placeholder="Ex: Medicina, Direito, ADS...">
         
             <datalist id="lista-cursos">

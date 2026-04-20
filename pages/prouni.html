@@ -6,6 +6,9 @@
   <title>Passou No Enem</title>
   <link rel="shortcut icon" href="../images/favicon/passou_no_enem_favicon-Red.png" type="image/x-icon">
 
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/prouni.css">
+
   <script src="../main.js" defer></script>
   <script src="../scripts/prouni.js" defer></script>
   
@@ -24,6 +27,8 @@
   <main>
     <section id="containerNota">
       <h1>Descubra onde você tem chance de bolsa com PROUNI</h1>
+      <button id="toggleTema">x</button>
+
         <form>
           <div id="containerElegivel" class="bloco">
 
@@ -40,7 +45,7 @@
 
             <div>
             <span id="resElegivel">...</span>
-            <span class="hidden" id="tipoBolsa">\o/
+            <span class="hidden" id="tipoBolsa">\o/</span>
             </div>
           </div>
 
@@ -54,7 +59,7 @@
             </datalist>
         
             <label for="seuCurso">Qual curso você quer?</label>
-            <input type="datetime" name="seuCurso" id="seuCurso" list="lista-cursos"
+            <input type="text" name="seuCurso" id="seuCurso" list="lista-cursos"
               placeholder="Ex: Medicina, Direito, ADS...">
         
             <datalist id="lista-cursos">

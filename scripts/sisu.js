@@ -65,6 +65,40 @@ const cursosSisu = [
 
 const form = document.querySelector('.form-grid');
 
+const modalSisu = document.querySelector('#radar');
+const overlaySisu = document.querySelector('#overlay');
+
+function selecaoInfoSisu() {
+  const listaCursosSisu = document.getElementById("lista-cursos")
+  const listaEstadosSisu = document.getElementById("lista-estados")
+
+cursosSisu.forEach(curso => {
+  const optionSisu = document.createElement('option')
+
+  optionSisu.value = curso.id;
+
+
+  optionSisu.textContent = curso.nome;
+
+  listaCursosSisu.appendChild(optionSisu)
+})
+
+//Pegar estados
+const estadosSisu = Object.values(infoFaculdades).map(f => f.estado);
+
+//Remover duplicados e ordenar com método sort()
+const estadosUnicosSisu = [...new Set(estadosSisu)].sort();
+
+//Adicionar no datalist
+estadosUnicosSisu.forEach(estado => {
+  const optionSisu = document.createElement('option')
+
+  optionSisu.value = estado;
+
+  listaEstadosSisu.appendChild(optionSisu)
+ })
+}
+
 function verificadorCotaPPB(renda, respEst) {
   const salarioMinimo = 1621; // Valor do salário mínimo em 2026
   const estudouEscolaPub = respEst.toLowerCase();
@@ -94,14 +128,19 @@ function mostrarResultado(usuario) {
  
   melhoresPublicas.forEach(facul => {
     const cardFacul = document.createElement('div');
-    cardFacul.classList.add('card-facul');
+    cardFacul.classList.add('cardFacul');
+    const cardFacTopo = document.createElement('div');
+    cardFacTopo.classList.add('cardTopo');
+    const cardFacMeio = document.createElement('div');
+    cardFacMeio.classList.add('cardMeio');
 
-    const pFacul = document.createElement('p');
+    const nmFacul = document.createElement('h3');
     const pNota = document.createElement('p');
     const spanDiff = document.createElement('span');
+    spanDiff.classList.add('status');
     const spanChance = document.createElement('span');
     
-    pFacul.textContent = facul.faculdade;
+    nmFacul.textContent = facul.faculdade;
 
     if (facul.diff < 0) {
       spanDiff.textContent = `Faltam: ${Math.abs(facul.diff)} pontos`;
@@ -116,6 +155,18 @@ function mostrarResultado(usuario) {
 
     cardFacul.classList.add(`chance-${nivel}`);
 
+    if (nivel === 'alta'){
+      spanChance.classList.add('sucesso');
+    }
+    
+    if (nivel === 'possivel' || nivel === 'quase'){
+      spanChance.classList.add('medio');
+    }
+
+    if (nivel === 'baixa' || nivel === 'muito-baixa'){
+      spanChance.classList.add('perigo');
+    }
+
     if (facul.diff >= 20) {
       spanChance.textContent = `Passa com folga`
     } else if(facul.diff >= 10 && facul.diff <= 20){
@@ -126,11 +177,16 @@ function mostrarResultado(usuario) {
       spanChance.textContent = `Precisa melhorar`
     }
 
-     cardFacul.appendChild(pFacul); 
-     cardFacul.appendChild(pNota);
-     cardFacul.appendChild(spanDiff);
-     divTodasChances.appendChild(cardFacul);
-     cardFacul.appendChild(spanChance);
+    cardFacTopo.appendChild(nmFacul);
+    cardFacTopo.appendChild(pNota);
+
+    cardFacMeio.appendChild(spanDiff);
+    cardFacMeio.appendChild(spanChance);
+
+     cardFacul.appendChild(cardFacTopo); 
+     cardFacul.appendChild(cardFacMeio);
+
+    divTodasChances.appendChild(cardFacul);
   });
 
 }
@@ -152,6 +208,8 @@ function pegarNomeCursoDig(idCurso) {
 
 const BtnVerificarCota = document.querySelector('#verificar');
 
+document.addEventListener('DOMContentLoaded', selecaoInfoSisu);
+
 BtnVerificarCota.addEventListener('click', function() {
     const estudouEmEscPub = document.querySelector('#escPub').value
 
@@ -167,6 +225,9 @@ BtnVerificarCota.addEventListener('click', function() {
 
 form.addEventListener('submit', function(event) {
     event.preventDefault();
+
+    modalSisu.classList.remove('hidden');
+    overlaySisu.classList.remove('hidden');
 
     const nota = Number(document.querySelector('#nota-enem').value);
 
@@ -221,3 +282,10 @@ form.addEventListener('submit', function(event) {
 
    contNota.textContent = nota;
   });
+
+  const btnFecharModalSisu = document.querySelector('#fechar');
+
+btnFecharModalSisu.addEventListener('click', () => {
+  modalSisu.classList.add('hidden');
+  overlaySisu.classList.add('hidden');
+})
