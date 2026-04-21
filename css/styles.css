@@ -285,6 +285,12 @@ button:active, input[type="submit"]:active {
   margin-top: 8px;
 }
 
+#containerElegivel input,
+#containerElegivel button {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .rodape {
   display: grid;
   gap: 16px;
