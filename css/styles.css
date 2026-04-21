@@ -20,6 +20,33 @@
   --secundario: #ff8c42;
 }
 
+.theme-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--destaque), var(--secundario));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-size: 18px;
+}
+
+/* Ícones */
+.theme-btn .sun,
+.theme-btn .moon {
+  position: absolute;
+  transition: 0.3s;
+}
+
+.sun { opacity: 1; }
+.moon { opacity: 0; }
+
+.claro .sun { opacity: 0; }
+.claro .moon { opacity: 1; }
+
 body {
   background-color: var(--fundo);
   color: var(--texto);
