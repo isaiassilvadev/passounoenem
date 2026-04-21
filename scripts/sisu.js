@@ -113,7 +113,8 @@ function verificadorCotaPPB(renda, respEst) {
 
 function mostrarResultado(usuario) {
     const divTodasChances = document.querySelector('#todasChances');
-  divTodasChances.innerHTML = "";
+    
+  divTodasChances.replacechildren([], divTodasChances.firstChild); // Limpa os resultados anteriores
 
   const melhoresPublicas = usuario.resultados.filter(univ => univ.tipo === "pública").sort((a, b) => {
     if (a.diff >= 0 && b.diff < 0) {
@@ -139,6 +140,9 @@ function mostrarResultado(usuario) {
     const spanDiff = document.createElement('span');
     spanDiff.classList.add('status');
     const spanChance = document.createElement('span');
+    spanChance.classList.add('status');
+    const barraSisu = document.createElement('div');
+    barraSisu.classList.add('barra-progresso');
     
     nmFacul.textContent = facul.faculdade;
 
@@ -177,6 +181,8 @@ function mostrarResultado(usuario) {
       spanChance.textContent = `Precisa melhorar`
     }
 
+    barraSisu.style.width = barraProgressoSisu(facul.diff);
+
     cardFacTopo.appendChild(nmFacul);
     cardFacTopo.appendChild(pNota);
 
@@ -197,6 +203,12 @@ function classificarChance(diff) {
   if (diff >= -60) return "quase";
   if (diff >= -100) return "baixa";
   if (diff < -100) return "muito-baixa";
+}
+
+function barraProgressoSisu(fdiff) {
+  const porcentagemSisu = Math.max(0, Math.min(100, 50 + fdiff)); // Exemplo: 50% + diferença, ajustado para ficar entre 0% e 100%
+
+  return porcentagemSisu +'%';
 }
 
 function pegarNomeCursoDig(idCurso) {

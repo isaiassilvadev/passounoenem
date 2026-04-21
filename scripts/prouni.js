@@ -151,7 +151,7 @@ function verificadorBolsa(renda) {
 
 function mostrarResultadoProuni(usuario) {
     const divTodasChancesPro = document.querySelector('#todasChances');
-    divTodasChancesPro.innerHTML = "";
+    divTodasChancesPro.replaceChildren([], divTodasChancesPro.firstChild); // Limpa os resultados anteriores
     
 
   const melhoresPrivadas = usuario.resultados.filter(univ => univ.tipo === "privada").sort((a, b) => {
@@ -177,8 +177,12 @@ function mostrarResultadoProuni(usuario) {
     const pNotaPro = document.createElement('p');
     const spanDiffPro = document.createElement('span');
     const spanChancePro = document.createElement('span');
+    spanChancePro.classList.add('status');
+    const barra = document.createElement('div');
+    barra.classList.add('barra-progresso');
     
     nmFaculPro.textContent = facul.faculdade;
+
 
     if (facul.diff < 0) {
       spanDiffPro.textContent = `Faltam: ${Math.abs(facul.diff)} pontos`;
@@ -191,7 +195,21 @@ function mostrarResultadoProuni(usuario) {
 
      const nivelAluno = classificarChanceBolsa(facul.diff);
 
+     if (nivelAluno === 'alta'){
+      spanChancePro.classList.add('sucesso');
+    }
+    
+    if (nivelAluno === 'possivel' || nivelAluno === 'quase'){
+      spanChancePro.classList.add('medio');
+    }
+
+    if (nivelAluno === 'baixa' || nivelAluno === 'muito-baixa'){
+      spanChancePro.classList.add('perigo');
+    }
+
     cardFaculPro.classList.add(`chance-${nivelAluno}`);
+
+    barra.style.width = barraProgresso(facul.diff);
 
     if (facul.diff >= 20) {
       spanChancePro.textContent = `Passa com folga`
@@ -208,9 +226,10 @@ function mostrarResultadoProuni(usuario) {
     
     cardFacMeioPro.appendChild(spanDiffPro);
     cardFacMeioPro.appendChild(spanChancePro);
+    cardFacMeioPro.appendChild(barra);
 
      cardFaculPro.appendChild(cardFacTopoPro); 
-     cardFaculPro.appendChild(cardFacMeioPRo);
+     cardFaculPro.appendChild(cardFacMeioPro);
 
      divTodasChancesPro.appendChild(cardFaculPro);
   
@@ -224,6 +243,12 @@ function classificarChanceBolsa(diff) {
   if (diff >= -60) return "quase";
   if (diff >= -100) return "baixa";
   if (diff < -100) return "muito-baixa";
+}
+
+function barraProgresso(fdiff) {
+  const porcentagem = Math.max(0, Math.min(100, 50 + fdiff)); // Exemplo: 50% + diferença, ajustado para ficar entre 0% e 100%
+
+  return porcentagem +'%';
 }
 
 function pegarNomeCurso(idCurso) {
