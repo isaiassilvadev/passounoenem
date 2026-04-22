@@ -250,7 +250,7 @@ button:active, input[type="submit"]:active {
 .cards-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12px;
+  gap: 16px;
 }
 
 .cardFacul {
@@ -343,9 +343,19 @@ button:active, input[type="submit"]:active {
   button:hover, input[type="submit"]:hover {
     background-color: var(--secundario);
   }
+
+  .cardHome:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+  }
 }
 
 @media (min-width: 600px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .
   .cards-grid {
     grid-template-columns: repeat(2, 1fr);
   }
