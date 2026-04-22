@@ -100,6 +100,24 @@ header img {
   width: 120px;
 }
 
+a {
+  text-decoration: none;
+  color: var(--destaque);
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+/* remove aquele highlight feio no mobile */
+a:focus {
+  outline: none;
+}
+
+/* quando clica */
+a:active {
+  opacity: 0.7;
+  transform: scale(0.97);
+}
+
 nav {
   display: flex;
   gap: 16px;
@@ -339,6 +357,11 @@ button:active, input[type="submit"]:active {
 }
 
 @media (hover: hover) {
+ a:hover {
+    color: var(--secundario);
+    text-decoration: underline;
+  }
+                   
   nav a:hover {  
     transform: translateY(-2px) scale(1.03);
     box-shadow: 0 10px 25px rgba(124, 77, 255, 0.4);
