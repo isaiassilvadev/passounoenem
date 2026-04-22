@@ -270,6 +270,15 @@ BtnVerificarEleg.addEventListener('click', function() {
   const spanElegivel = document.querySelector('#resElegivel');
 
   spanElegivel.textContent = tipoBolsa;
+
+    // Remove classes antigas e adiciona a nova baseada no resultado
+    spanEleg.classList.remove('resultado-sucesso', 'resultado-aviso');
+
+    if (eleitoCotaPPB.includes("Elegível") || eleitoCotaPPB.includes("Integral")) {
+        spanEleg.classList.add('resultado-sucesso');
+    } else {
+        spanEleg.classList.add('resultado-aviso');
+                         }
 });
 
 formPro.addEventListener('submit', (e) => {
