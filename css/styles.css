@@ -345,6 +345,30 @@ button:active, input[type="submit"]:active {
   box-sizing: border-box;
 }
 
+/* Estilo base para o resultado */
+#resElegivel {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold; /* O bold solicitado */
+  font-size: 1.1rem;
+  padding: 8px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+/* Classe para quando for elegível (Verde/Sucesso) */
+.resultado-sucesso {
+  color: #00c853;
+  background: rgba(0, 200, 83, 0.1);
+}
+
+/* Classe para quando não for elegível (Vermelho/Aviso) */
+.resultado-aviso {
+  color: #ff5252;
+  background: rgba(255, 82, 82, 0.1);
+}
+
+
 .rodape {
   display: grid;
   gap: 16px;
