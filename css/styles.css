@@ -229,6 +229,24 @@ button:active, input[type="submit"]:active {
   justify-content: space-between;
 }
 
+.cardHome {
+  background: var(--card);
+  padding: 20px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  transition: 0.25s;
+}
+
+.cardHome a {
+  margin-top: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--destaque);
+}
+
 .cards-grid {
   display: grid;
   grid-template-columns: 1fr;
